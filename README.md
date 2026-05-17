@@ -1,6 +1,6 @@
 # Project Management Decision Simulator
 
-A self-contained React application for graduate-level project management instruction. Students select or generate an industry scenario, make project decisions across PMI Knowledge Areas, observe metric tradeoffs, write reflections, and copy a final debrief for submission.
+A self-contained React application for project management instruction. Students select or generate an industry scenario, make project decisions across PMI Knowledge Areas, observe metric tradeoffs, write reflections, and copy a final debrief for submission.
 
 ## Features
 
