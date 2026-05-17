@@ -688,11 +688,12 @@ button:disabled {
   justify-content: space-between;
   gap: 12px;
   align-items: baseline;
-  font-weight: 800;
+  font-weight: 400;
 }
 
 .metric-card__header strong {
   font-size: 1.25rem;
+  font-weight: 900;
 }
 
 .metric-bar {
