@@ -239,7 +239,7 @@ export function createDynamicScenario({ industry, projectName, objective, constr
     id: `custom-${Date.now()}`,
     projectName: context,
     industry,
-    background: `This custom simulation places students in a ${industry.toLowerCase()} project where uncertainty, stakeholder pressure, and ${primaryConstraint.toLowerCase()} shape project decisions.`,
+    background: `This custom simulation presents a ${industry.toLowerCase()} project where uncertainty, stakeholder pressure, and ${primaryConstraint.toLowerCase()} shape project decisions.`,
     objective: objective || `Deliver ${context.toLowerCase()} while balancing delivery constraints, stakeholder expectations, and risk exposure.`,
     constraints: [primaryConstraint, "Competing stakeholder priorities", "Limited management reserve", "Uncertain adoption conditions"],
     sponsorExpectations: sponsor,
@@ -262,14 +262,14 @@ export function createDynamicScenario({ industry, projectName, objective, constr
     instructorNotes: {
       emphasis: knowledgeAreas,
       tradeoffs:
-        "The generated scenario is designed to surface cross-Knowledge Area tradeoffs and context-dependent judgment.",
+        "The generated scenario surfaces cross-Knowledge Area tradeoffs and context-dependent project judgment.",
       discussion: [
         "Which decision created the most important second-order consequence?",
-        "Where did the team trade short-term performance for long-term control?",
-        "How did the industry context change what counted as a responsible decision?"
+        "Where did the project trade short-term performance for long-term control?",
+        "Which constraint received the most protection, and which constraint absorbed the most pressure?"
       ],
       assignment:
-        "Ask students to revise the generated scenario by adding one industry-specific risk and one stakeholder escalation point."
+        "Revise the scenario by adding one additional project risk, one escalation trigger, and one monitoring action."
     }
   };
 }

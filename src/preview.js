@@ -1,6 +1,8 @@
 import { scenarios, metricDefinitions, metricLabels } from "./data/scenarios.js";
 import { createDynamicScenario, customIndustryOptions } from "./data/dynamicScenarios.js";
 import { applyEffect, calculateHealth, evaluateKnowledgePerformance } from "./utils/scoring.js";
+import { rationaleForMetric, scoringRubricSummary } from "./utils/scoringRationale.js";
+import { conceptsForSuggestedAction, decisionEffectRubric } from "./utils/pmConcepts.js";
 import {
   affectedKnowledgeAreas,
   delayedConsequenceForDecision,
@@ -336,18 +338,43 @@ function renderMetrics() {
 }
 
 function renderInstructorNotes(notes) {
+  const actionConcepts = conceptsForSuggestedAction(notes.assignment, notes.emphasis);
+  const rubric = decisionEffectRubric();
+
   return html`
     <details class="instructor-notes">
-      <summary>Instructor Notes</summary>
+      <summary>Project Management Notes</summary>
       <div class="notes-body">
-        <h4>Knowledge Areas Emphasized</h4>
+        <div class="standards-note">
+          <strong>Scoring and Standards Note</strong>
+          <p>Scoring and suggested actions are authored instructional models. They are intended to support project management reflection and are aligned with recognized project management concepts, including PMI terminology. They are not official PMI guidance, PMI-derived scoring, or PMI-validated assessment instruments.</p>
+        </div>
+        <h4>Knowledge Area Focus</h4>
         ${tagRow(notes.emphasis, "PMI Knowledge Areas emphasized")}
-        <h4>Designed Tradeoffs</h4>
+        <h4>Tradeoff Focus</h4>
         <p>${escape(notes.tradeoffs)}</p>
-        <h4>Suggested Discussion Questions</h4>
+        <h4>Project Management Reflection</h4>
         <ul>${notes.discussion.map((item) => `<li>${escape(item)}</li>`).join("")}</ul>
-        <h4>Follow-up Assignment</h4>
+        <h4>Suggested Action</h4>
         <p>${escape(notes.assignment)}</p>
+        <h4>Concepts Reinforced</h4>
+        <div class="concept-row" aria-label="Project management concepts reinforced by the suggested action">
+          ${actionConcepts.map((concept) => `<span>${escape(concept)}</span>`).join("")}
+        </div>
+        <h4>Decision Effect Rubric</h4>
+        <div class="rubric-grid">
+          ${rubric
+            .map(
+              (item) => html`
+                <div>
+                  <strong>${escape(item.range)}</strong>
+                  <span>${escape(item.label)}</span>
+                  <p>${escape(item.meaning)}</p>
+                </div>
+              `
+            )
+            .join("")}
+        </div>
       </div>
     </details>
   `;
@@ -441,6 +468,28 @@ function renderSimulation() {
                           .map(([metric, value]) => `<span class="${value >= 0 ? "delta-positive" : "delta-negative"}">${metric}: ${value > 0 ? "+" : ""}${value}</span>`)
                           .join("")}
                       </div>
+                      <details class="scoring-rationale">
+                        <summary>Why these score changes?</summary>
+                        <div class="rationale-body">
+                          <p>These consequences are predefined instructional assumptions for this option. The app applies the coded effects below; it is not using live AI scoring during the round.</p>
+                          <ul class="rationale-rubric">
+                            ${scoringRubricSummary().map((item) => `<li>${escape(item)}</li>`).join("")}
+                          </ul>
+                          <div class="rationale-list">
+                            ${Object.entries(selected.option.effect)
+                              .map(([metric, value]) => {
+                                const rationale = rationaleForMetric(metric, value);
+                                return html`
+                                  <article class="rationale-item">
+                                    <strong>${escape(rationale.label)}</strong>
+                                    <span>${escape(rationale.text)}</span>
+                                  </article>
+                                `;
+                              })
+                              .join("")}
+                          </div>
+                        </div>
+                      </details>
                     </div>
                   `
                 : ""
@@ -541,13 +590,23 @@ function renderDebrief() {
           .join("")}
       </section>
       <section class="debrief-section debrief-section--stack">
-        <h2>Suggested Class Discussion</h2>
+        <h2>Project Management Reflection</h2>
         <ul>${scenario.instructorNotes.discussion.map((question) => `<li>${escape(question)}</li>`).join("")}</ul>
       </section>
       ${renderInstructorNotes(scenario.instructorNotes)}
       ${renderAppFooter()}
     </main>
   `;
+}
+
+function scrollToTop() {
+  window.scrollTo({ top: 0, behavior: "smooth" });
+}
+
+function scrollToDecisionPanel() {
+  window.setTimeout(() => {
+    document.querySelector(".decision-panel")?.scrollIntoView({ behavior: "smooth", block: "start" });
+  }, 0);
 }
 
 function buildExportText() {
@@ -605,6 +664,7 @@ function launchScenario(scenario) {
     openScenarioId: null
   };
   renderSimulation();
+  scrollToTop();
 }
 
 function chooseDecision(index) {
@@ -655,12 +715,19 @@ root.addEventListener("click", async (event) => {
   if (action === "reset") {
     state.scenario = null;
     renderHome();
+    scrollToTop();
   }
   if (action === "decision") chooseDecision(Number(control.dataset.index));
-  if (action === "next") nextRound();
+  if (action === "next") {
+    nextRound();
+    if (state.showDebrief) {
+      scrollToTop();
+    } else {
+      scrollToDecisionPanel();
+    }
+  }
   if (action === "print") window.print();
   if (action === "copy") await navigator.clipboard.writeText(buildExportText());
-  window.scrollTo({ top: 0, behavior: "smooth" });
 });
 
 root.addEventListener("submit", (event) => {

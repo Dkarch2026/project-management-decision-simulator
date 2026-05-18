@@ -138,10 +138,10 @@ export const scenarios = [
     instructorNotes: {
       emphasis: ["Integration", "Scope", "Quality", "Risk", "Procurement", "Stakeholder"],
       tradeoffs:
-        "Students should see how protecting schedule can transfer risk into adoption, data quality, and operational benefits.",
-      discussion: ["When should local customization be allowed?", "How should benefits realization be governed after project closure?", "What vendor risks should be escalated contractually?"],
+        "Protecting schedule can transfer pressure into quality, adoption, vendor performance, and benefits realization.",
+      discussion: ["Which project constraint is being protected, and which constraint absorbs the pressure?", "What evidence should be required before approving a baseline change?", "How should accountability continue after project closure?"],
       assignment:
-        "Ask students to prepare a change-control recommendation memo for the regional customization request."
+        "Prepare a change-control recommendation that identifies the preferred option, expected tradeoffs, and conditions for approval."
     }
   },
   {
@@ -235,10 +235,10 @@ export const scenarios = [
     instructorNotes: {
       emphasis: ["Stakeholder", "Communications", "Risk", "Procurement", "Resource", "Quality"],
       tradeoffs:
-        "The scenario asks students to balance executive urgency with clinical workflow, patient trust, and regulated data risk.",
-      discussion: ["How should clinical adoption concerns be represented in governance?", "When is a phased healthcare launch ethically acceptable?", "What evidence should trigger a public launch?"],
+        "Executive urgency must be balanced against adoption readiness, workflow impact, trust, and regulated data risk.",
+      discussion: ["How should stakeholder concerns be represented in project governance?", "When is a phased launch a stronger control strategy than a full launch?", "What evidence should be required before communicating launch readiness?"],
       assignment:
-        "Have students draft a stakeholder engagement plan for the two reluctant clinics."
+        "Create a stakeholder engagement plan that defines concerns, influence, communication needs, and escalation points."
     }
   },
   {
@@ -332,10 +332,10 @@ export const scenarios = [
     instructorNotes: {
       emphasis: ["Cost", "Schedule", "Quality", "Risk", "Stakeholder", "Procurement"],
       tradeoffs:
-        "Students should evaluate when baseline control should yield to public value, compliance, and lifecycle quality.",
-      discussion: ["How should public projects handle discoveries outside the original scope?", "What counts as acceptable partial opening?", "How should contingency be governed?"],
+        "Baseline control must be weighed against compliance, public value, stakeholder confidence, and lifecycle quality.",
+      discussion: ["When should new information justify changing the approved baseline?", "What makes a partial delivery acceptable or unacceptable?", "How should contingency be governed when several constraints are under pressure?"],
       assignment:
-        "Ask students to create a change request for the HVAC increase with funding alternatives."
+        "Create a change request that explains the issue, impact on constraints, funding options, and recommended governance decision."
     }
   },
   {
@@ -425,14 +425,14 @@ export const scenarios = [
       }
     ],
     finalDebrief:
-      "The rollout asks students to manage market timing against product quality, supplier constraints, and expectation setting.",
+      "The rollout requires balancing market timing against product quality, supplier constraints, and expectation setting.",
     instructorNotes: {
       emphasis: ["Scope", "Quality", "Procurement", "Risk", "Communications"],
       tradeoffs:
-        "Students should recognize how late feature pressure and supply choices interact with certification and customer trust.",
-      discussion: ["What is an acceptable quality waiver?", "When should launch quantity be reduced?", "How should sales commitments be controlled?"],
+        "Late scope pressure and supply choices can affect quality assurance, risk exposure, stakeholder commitments, and trust.",
+      discussion: ["When is accepting a quality exception an appropriate project decision?", "How should scope or quantity be adjusted when constraints tighten?", "How should commitments be controlled when uncertainty remains?"],
       assignment:
-        "Have students draft a risk response plan for the chip allocation problem."
+        "Draft a risk response plan that defines triggers, owners, mitigation actions, and communication expectations."
     }
   },
   {
@@ -526,10 +526,10 @@ export const scenarios = [
     instructorNotes: {
       emphasis: ["Stakeholder", "Resource", "Quality", "Communications", "Integration"],
       tradeoffs:
-        "Students examine how organizational authority, expert labor, and evidence requirements shape project pace.",
-      discussion: ["How should governance risk be managed?", "When is a pilot preferable to a full launch?", "What does quality mean in an academic project?"],
+        "Organizational authority, expert capacity, evidence requirements, and stakeholder trust all shape project pace.",
+      discussion: ["How should governance risk be managed when approval authority is distributed?", "When is a pilot preferable to full implementation?", "How should quality be defined when success depends on adoption and evidence?"],
       assignment:
-        "Ask students to prepare a stakeholder engagement matrix for faculty, admissions, students, and accreditation reviewers."
+        "Prepare a stakeholder engagement matrix that identifies influence, concerns, communication needs, and decision rights."
     }
   },
   {
@@ -623,10 +623,10 @@ export const scenarios = [
     instructorNotes: {
       emphasis: ["Integration", "Risk", "Resource", "Cost", "Stakeholder", "Communications"],
       tradeoffs:
-        "Students should see that social impact urgency does not remove the need for privacy, reporting discipline, and staff sustainability.",
-      discussion: ["How should programs balance service volume and quality?", "What reporting controls are appropriate for multi-agency work?", "How should client stories be used ethically?"],
+        "Mission urgency does not remove the need for privacy, reporting discipline, resource sustainability, and sponsor alignment.",
+      discussion: ["How should a project balance output volume with quality and sustainability?", "What controls are needed when multiple partners contribute to the same deliverable?", "How should sensitive stakeholder information be governed?"],
       assignment:
-        "Have students build a risk register for privacy, staffing, reporting, and funder relationship risks."
+        "Build a risk register that names root causes, owners, probability, impact, response strategy, and monitoring triggers."
     }
   },
   {
@@ -720,10 +720,10 @@ export const scenarios = [
     instructorNotes: {
       emphasis: ["Schedule", "Procurement", "Communications", "Quality", "Integration"],
       tradeoffs:
-        "Students should recognize that polished delivery and business impact are related but not identical success criteria.",
-      discussion: ["How should late executive changes be governed?", "What backup planning is justified for hybrid events?", "How should marketing outcomes be measured?"],
+        "Visible delivery quality and measurable benefits are related, but they are not identical success criteria.",
+      discussion: ["How should late sponsor requests be governed once execution is underway?", "When does backup planning become necessary rather than optional?", "How should benefits be measured when outcomes mature after project closure?"],
       assignment:
-        "Ask students to create a stakeholder communication plan for event performance reporting."
+        "Create a closeout and benefits realization plan that separates immediate delivery results from longer-term outcome measures, assigns owners, and defines follow-up review dates."
     }
   },
   {
@@ -817,10 +817,10 @@ export const scenarios = [
     instructorNotes: {
       emphasis: ["Quality", "Risk", "Stakeholder", "Procurement", "Integration"],
       tradeoffs:
-        "Students should understand that AI project success depends on governance, explainability, and workflow adoption, not technical accuracy alone.",
-      discussion: ["Who should define model success?", "When should aggregate performance be rejected as insufficient?", "What must exist before closing an AI project?"],
+        "Technical performance must be balanced with governance, explainability, stakeholder adoption, and operational ownership.",
+      discussion: ["Who should define success criteria when technical and operational priorities differ?", "When is aggregate performance insufficient evidence of project success?", "What ownership structure must exist before responsible project closure?"],
       assignment:
-        "Ask students to write a model governance charter section for monitoring, escalation, and ownership."
+        "Write a governance charter section that defines monitoring, escalation, ownership, and acceptance criteria."
     }
   }
 ];
