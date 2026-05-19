@@ -77,3 +77,28 @@ export function decisionEffectRubric() {
     }
   ];
 }
+
+export function referenceAnchors() {
+  return [
+    {
+      label: "PMI PMBOK Guide and Standards",
+      url: "https://www.pmi.org/pmbok-guide-standards/foundational/pmbok",
+      use: "Reference point for project management principles, domains, tailoring, and value delivery language."
+    },
+    {
+      label: "PMI Process Groups: A Practice Guide",
+      url: "https://www.pmi.org/pmbok-guide-standards/practice-guides/process-groups-a-practice-guide",
+      use: "Reference point for process-oriented practices such as initiating, planning, executing, monitoring and controlling, and closing."
+    },
+    {
+      label: "PMI: The Essential Role of Communications",
+      url: "https://www.pmi.org/learning/thought-leadership/pulse/essential-role-communications",
+      use: "Reference point for the importance of clear stakeholder communication in project outcomes."
+    },
+    {
+      label: "PMI Pulse of the Profession 2026: Driving Success in Complex Projects",
+      url: "https://www.pmi.org/learning/thought-leadership/driving-success-in-complex-projects",
+      use: "Reference point for complexity, stakeholder alignment, systems thinking, and outcome-focused project work."
+    }
+  ];
+}

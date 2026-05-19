@@ -2,7 +2,7 @@ import { scenarios, metricDefinitions, metricLabels } from "./data/scenarios.js"
 import { createDynamicScenario, customIndustryOptions } from "./data/dynamicScenarios.js";
 import { applyEffect, calculateHealth, evaluateKnowledgePerformance } from "./utils/scoring.js";
 import { rationaleForMetric, scoringRubricSummary } from "./utils/scoringRationale.js";
-import { conceptsForSuggestedAction, decisionEffectRubric } from "./utils/pmConcepts.js";
+import { conceptsForSuggestedAction, decisionEffectRubric, referenceAnchors } from "./utils/pmConcepts.js";
 import {
   affectedKnowledgeAreas,
   delayedConsequenceForDecision,
@@ -115,7 +115,7 @@ function renderHome() {
         <div>
           <h1>Project Management Decision Simulator</h1>
           <p>
-            Practice realistic decision making across PMI Knowledge Areas. Each scenario
+            Practice realistic decision making across core project management areas. Each scenario
             presents tradeoffs among scope, schedule, cost, quality, resources, risk, communications, procurement,
             stakeholders, and integration.
           </p>
@@ -340,6 +340,7 @@ function renderMetrics() {
 function renderInstructorNotes(notes) {
   const actionConcepts = conceptsForSuggestedAction(notes.assignment, notes.emphasis);
   const rubric = decisionEffectRubric();
+  const references = referenceAnchors();
 
   return html`
     <details class="instructor-notes">
@@ -375,6 +376,21 @@ function renderInstructorNotes(notes) {
             )
             .join("")}
         </div>
+        <h4>Reference Anchors</h4>
+        <p class="reference-note">These sources provide project management concepts used for alignment. They do not make the simulator official PMI guidance or a PMI-validated scoring instrument.</p>
+        <ul class="reference-list">
+          ${references
+            .map(
+              (source) => html`
+                <li>
+                  <a href="${escape(source.url)}" target="_blank" rel="noreferrer" data-action="open-reference" data-url="${escape(source.url)}">${escape(source.label)}</a>
+                  <span>${escape(source.use)}</span>
+                </li>
+              `
+            )
+            .join("")}
+        </ul>
+        <p class="trademark-note">PMI, PMBOK, and Pulse of the Profession are trademarks or publications of Project Management Institute. Links are provided for reference only; no endorsement is implied.</p>
       </div>
     </details>
   `;
@@ -727,6 +743,10 @@ root.addEventListener("click", async (event) => {
     }
   }
   if (action === "print") window.print();
+  if (action === "open-reference") {
+    event.preventDefault();
+    window.open(control.dataset.url, "_blank", "noopener,noreferrer");
+  }
   if (action === "copy") await navigator.clipboard.writeText(buildExportText());
 });
 
