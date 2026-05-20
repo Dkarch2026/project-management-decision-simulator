@@ -241,6 +241,10 @@ export function createDynamicScenario({ industry, projectName, objective, constr
     industry,
     background: `This custom simulation presents a ${industry.toLowerCase()} project where uncertainty, stakeholder pressure, and ${primaryConstraint.toLowerCase()} shape project decisions.`,
     objective: objective || `Deliver ${context.toLowerCase()} while balancing delivery constraints, stakeholder expectations, and risk exposure.`,
+    centralTension:
+      "The core decision is how to make a defensible project management tradeoff when constraints, stakeholder expectations, risk exposure, and decision authority compete.",
+    governanceContext:
+      "The scenario assumes sponsor oversight and project governance are available; learners should identify who has authority, what evidence is needed, and what residual risk or follow-up ownership remains.",
     constraints: [primaryConstraint, "Competing stakeholder priorities", "Limited management reserve", "Uncertain adoption conditions"],
     sponsorExpectations: sponsor,
     stakeholders: profile.stakeholders,
@@ -258,18 +262,19 @@ export function createDynamicScenario({ industry, projectName, objective, constr
       options: round.options
     })),
     finalDebrief:
-      "This custom scenario emphasizes that project decisions are contextual tradeoffs. The strongest path depends on stakeholder expectations, constraint priorities, risk tolerance, and the evidence available at the decision point.",
+      "This custom scenario illustrates how project decisions require balancing stakeholder expectations, constraint priorities, risk tolerance, evidence quality, and operational ownership; short-term gains can create downstream consequences in quality, adoption, risk, or benefits realization.",
     instructorNotes: {
       emphasis: knowledgeAreas,
       tradeoffs:
-        "The generated scenario surfaces cross-Knowledge Area tradeoffs and context-dependent project judgment.",
+        "The generated scenario surfaces cross-focus-area tradeoffs and context-dependent project judgment.",
       discussion: [
         "Which decision created the most important second-order consequence?",
         "Where did the project trade short-term performance for long-term control?",
-        "Which constraint received the most protection, and which constraint absorbed the most pressure?"
+        "Which constraint received the most protection, and which constraint absorbed the most pressure?",
+        "What evidence, acceptance criteria, or escalation trigger would make the decision more defensible?"
       ],
       assignment:
-        "Revise the scenario by adding one additional project risk, one escalation trigger, and one monitoring action."
+        "Create a decision control note that identifies the issue, affected constraints, assumptions, owner, escalation trigger, monitoring action, and follow-up review timing."
     }
   };
 }

@@ -42,7 +42,7 @@ function tagRow(areas, label = "") {
   return html`
     <div class="knowledge-tag-group">
       ${label ? `<span class="tag-label">${escape(label)}</span>` : ""}
-      <div class="tag-row" aria-label="${escape(label || "PMI Knowledge Areas")}">
+      <div class="tag-row" aria-label="${escape(label || "Project management focus areas")}">
         ${areas.map((area) => `<span class="knowledge-tag">${escape(area)}</span>`).join("")}
       </div>
     </div>
@@ -63,8 +63,8 @@ function metricImpactText(impact) {
   const direction =
     impact.metric === "risk"
       ? impact.raw > 0
-        ? "increased risk, lowering the knowledge-area score"
-        : "reduced risk, improving the knowledge-area score"
+        ? "increased risk, lowering the focus-area score"
+        : "reduced risk, improving the focus-area score"
       : impact.raw > 0
         ? "improved this metric"
         : "reduced this metric";
@@ -85,7 +85,7 @@ function scoreTile(label, area, detail) {
         <small>Score ${escape(formatSigned(detail.average))}</small>
       </summary>
       <div class="score-popover">
-        <p>This score is the average net impact of decisions tagged to this Knowledge Area. Positive metric changes add points; risk is inverted, so reducing risk adds points and increasing risk subtracts points.</p>
+        <p>This score is the average net impact of decisions tagged to this project management focus area. Positive metric changes add points; risk is inverted, so reducing risk adds points and increasing risk subtracts points.</p>
         <dl>
           <div><dt>Decision count</dt><dd>${detail.count}</dd></div>
           <div><dt>Total net impact</dt><dd>${escape(formatSigned(detail.total))}</dd></div>
@@ -121,6 +121,7 @@ function renderHome() {
           </p>
         </div>
       </section>
+      ${renderGlobalSimulatorGuide()}
       <section class="home-workspace" aria-label="Scenario options">
         <div class="starter-section">
           <div class="section-intro">
@@ -146,11 +147,13 @@ function renderHome() {
                             <div class="scenario-expanded">
                               <p>${escape(scenario.background)}</p>
                               <dl class="scenario-details">
+                                ${scenario.centralTension ? `<div><dt>Core Decision Tension</dt><dd>${escape(scenario.centralTension)}</dd></div>` : ""}
                                 <div><dt>Primary Constraints</dt><dd>${escape(scenario.constraints.join(", "))}</dd></div>
+                                ${scenario.governanceContext ? `<div><dt>Governance Context</dt><dd>${escape(scenario.governanceContext)}</dd></div>` : ""}
                                 <div><dt>Sponsor Expectations</dt><dd>${escape(scenario.sponsorExpectations)}</dd></div>
                                 <div><dt>Key Stakeholders</dt><dd>${escape(scenario.stakeholders.join(", "))}</dd></div>
                               </dl>
-                          ${tagRow(scenario.primaryKnowledgeAreas, "PMI Knowledge Areas emphasized in this scenario")}
+                          ${tagRow(scenario.primaryKnowledgeAreas, "Project management focus areas emphasized in this scenario")}
                               <button class="primary-button" data-action="start" data-id="${scenario.id}">Start Scenario</button>
                             </div>
                           `
@@ -339,19 +342,13 @@ function renderMetrics() {
 
 function renderInstructorNotes(notes) {
   const actionConcepts = conceptsForSuggestedAction(notes.assignment, notes.emphasis);
-  const rubric = decisionEffectRubric();
-  const references = referenceAnchors();
 
   return html`
     <details class="instructor-notes">
       <summary>Project Management Notes</summary>
       <div class="notes-body">
-        <div class="standards-note">
-          <strong>Scoring and Standards Note</strong>
-          <p>Scoring and suggested actions are authored instructional models. They are intended to support project management reflection and are aligned with recognized project management concepts, including PMI terminology. They are not official PMI guidance, PMI-derived scoring, or PMI-validated assessment instruments.</p>
-        </div>
-        <h4>Knowledge Area Focus</h4>
-        ${tagRow(notes.emphasis, "PMI Knowledge Areas emphasized")}
+        <h4>Project Management Focus Areas</h4>
+        ${tagRow(notes.emphasis, "Project management focus areas emphasized")}
         <h4>Tradeoff Focus</h4>
         <p>${escape(notes.tradeoffs)}</p>
         <h4>Project Management Reflection</h4>
@@ -361,6 +358,27 @@ function renderInstructorNotes(notes) {
         <h4>Concepts Reinforced</h4>
         <div class="concept-row" aria-label="Project management concepts reinforced by the suggested action">
           ${actionConcepts.map((concept) => `<span>${escape(concept)}</span>`).join("")}
+        </div>
+      </div>
+    </details>
+  `;
+}
+
+function renderGlobalSimulatorGuide() {
+  const rubric = decisionEffectRubric();
+  const references = referenceAnchors();
+
+  return html`
+    <details class="global-guide">
+      <summary>Simulator Scoring and Reference Guide</summary>
+      <div class="global-guide__body">
+        <div class="standards-note">
+          <strong>Scoring and Standards Note</strong>
+          <p>This simulator is an independent educational tool that uses authored scenarios, illustrative decision logic, and simplified scoring to support project management reflection and discussion. It is not PMI-authored, PMI-endorsed, PMI-derived scoring, or a PMI-validated assessment instrument. References to PMI publications are included only as informational learning anchors. Scenario outcomes are simplified for instruction and do not replace organizational governance, legal, compliance, procurement, or policy review.</p>
+        </div>
+        <div class="standards-note">
+          <strong>How to Read the Choices</strong>
+          <p>Each option is a plausible response in a constrained project situation. Learners are practicing defensible project management judgment: making tradeoffs explicit, matching the response to decision authority, documenting residual risk, and identifying who owns follow-up.</p>
         </div>
         <h4>Decision Effect Rubric</h4>
         <div class="rubric-grid">
@@ -377,7 +395,7 @@ function renderInstructorNotes(notes) {
             .join("")}
         </div>
         <h4>Reference Anchors</h4>
-        <p class="reference-note">These sources provide project management concepts used for alignment. They do not make the simulator official PMI guidance or a PMI-validated scoring instrument.</p>
+        <p class="reference-note">These sources provide informational learning anchors for commonly used project management concepts. They do not make the simulator official PMI guidance or a PMI-validated scoring instrument.</p>
         <ul class="reference-list">
           ${references
             .map(
@@ -401,6 +419,7 @@ function renderSimulation() {
   const round = scenario.rounds[state.roundIndex];
   const selected = state.decisions[state.roundIndex];
   const conditions = emergingConditions(state.metrics, state.decisions);
+  const decisionContext = `Decision context: ${round.phase} checkpoint for ${round.knowledgeArea.replace("Project ", "").replace(" Management", "")}.`;
 
   root.innerHTML = html`
     <main class="sim-page">
@@ -416,7 +435,9 @@ function renderSimulation() {
         <aside class="context-panel">
           <h2>Project Context</h2>
           <dl>
+            ${scenario.centralTension ? `<dt>Core Decision Tension</dt><dd>${escape(scenario.centralTension)}</dd>` : ""}
             <dt>Primary Constraints</dt><dd>${escape(scenario.constraints.join(", "))}</dd>
+            ${scenario.governanceContext ? `<dt>Governance Context</dt><dd>${escape(scenario.governanceContext)}</dd>` : ""}
             <dt>Sponsor Expectations</dt><dd>${escape(scenario.sponsorExpectations)}</dd>
             <dt>Key Stakeholders</dt><dd>${escape(scenario.stakeholders.join(", "))}</dd>
           </dl>
@@ -431,8 +452,9 @@ function renderSimulation() {
               <span>${escape(round.knowledgeArea)}</span>
             </div>
             <h2>${escape(round.title)}</h2>
+            <p class="decision-context">${escape(decisionContext)}</p>
             <p class="situation">${escape(round.situation)}</p>
-            ${tagRow(affectedKnowledgeAreas(round.knowledgeArea, round.options[0].effect), "PMI Knowledge Areas involved in this decision")}
+            ${tagRow(affectedKnowledgeAreas(round.knowledgeArea, round.options[0].effect), "Project management focus areas involved in this decision")}
             ${
               conditions.length
                 ? html`
@@ -474,7 +496,7 @@ function renderSimulation() {
                             <div><dt>Stakeholder Effect</dt><dd>${escape(tradeoff.stakeholderImpact)}</dd></div>
                             <div><dt>Timing</dt><dd>${escape(tradeoff.timing)}</dd></div>
                           </dl>
-                          ${tagRow(affectedKnowledgeAreas(round.knowledgeArea, selected.option.effect), "Knowledge Areas affected by the selected option")}
+                          ${tagRow(affectedKnowledgeAreas(round.knowledgeArea, selected.option.effect), "Project management focus areas affected by the selected option")}
                         `;
                       })()}
                       <h3>Decision Consequence</h3>
@@ -543,6 +565,7 @@ function renderDebrief() {
         <div>
           <span class="eyebrow">Final Debrief</span>
           <h1>${escape(scenario.projectName)}</h1>
+          <p>In this learning scenario, the decision path illustrates how competing project constraints interact. A defensible response makes tradeoffs explicit, aligns with governance and stakeholder needs, and documents residual risks and ownership. In practice, the appropriate action depends on organizational policy, contract terms, compliance requirements, and decision authority.</p>
           <p>${escape(scenario.finalDebrief)}</p>
         </div>
         <div class="debrief-actions">
@@ -552,8 +575,8 @@ function renderDebrief() {
       </section>
       <section class="debrief-section">
         <div class="score-tile"><span>Final Project Health</span><strong>${calculateHealth(state.metrics)}</strong></div>
-        ${scoreTile("Strongest Knowledge Area", performance.strongest, strongestDetail)}
-        ${scoreTile("Weakest Knowledge Area", performance.weakest, weakestDetail)}
+        ${scoreTile("Strongest Focus Area", performance.strongest, strongestDetail)}
+        ${scoreTile("Weakest Focus Area", performance.weakest, weakestDetail)}
       </section>
       <section class="debrief-section debrief-section--stack">
         <h2>Decision Pattern Analysis</h2>
@@ -634,8 +657,8 @@ function buildExportText() {
     `Project: ${scenario.projectName}`,
     `Industry: ${scenario.industry}`,
     `Final Project Health Score: ${calculateHealth(state.metrics)}`,
-    `Strongest Knowledge Area Performance: ${performance.strongest}`,
-    `Weakest Knowledge Area Performance: ${performance.weakest}`,
+    `Strongest Focus Area Performance: ${performance.strongest}`,
+    `Weakest Focus Area Performance: ${performance.weakest}`,
     "",
     "Decision Summary:"
   ];
@@ -657,7 +680,11 @@ function buildExportText() {
     });
     lines.push("");
   }
-  lines.push("Key Lessons Learned:", scenario.finalDebrief);
+  lines.push(
+    "Key Lessons Learned:",
+    "In this learning scenario, the decision path illustrates how competing project constraints interact. A defensible response makes tradeoffs explicit, aligns with governance and stakeholder needs, and documents residual risks and ownership. In practice, the appropriate action depends on organizational policy, contract terms, compliance requirements, and decision authority.",
+    scenario.finalDebrief
+  );
   return lines.join("\n");
 }
 

@@ -295,6 +295,7 @@ button:disabled {
 .context-panel,
 .debrief-section,
 .instructor-notes,
+.global-guide,
 .custom-builder {
   background: var(--panel);
   border: 1px solid #c5d4d8;
@@ -789,6 +790,13 @@ button:disabled {
   font-size: 1.65rem;
 }
 
+.decision-context {
+  margin: 0 0 10px;
+  color: var(--accent-dark);
+  font-size: 0.9rem;
+  font-weight: 900;
+}
+
 .decision-options {
   display: grid;
   gap: 10px;
@@ -1099,6 +1107,34 @@ blockquote {
   margin-top: 18px;
 }
 
+.global-guide {
+  margin-bottom: 18px;
+  overflow: hidden;
+  border-color: #b8ced0;
+  border-left: 5px solid var(--gold);
+}
+
+.global-guide summary {
+  min-height: 54px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 0 18px;
+  color: var(--accent-dark);
+  font-weight: 900;
+  cursor: pointer;
+}
+
+.global-guide__body {
+  display: grid;
+  gap: 14px;
+  padding: 0 18px 18px;
+}
+
+.global-guide__body h4 {
+  margin: 0 0 -6px;
+}
+
 .instructor-notes summary {
   min-height: 48px;
   display: flex;
@@ -1190,6 +1226,31 @@ blockquote {
 
 .rubric-grid p {
   margin: 6px 0 0;
+}
+
+.compact-rubric {
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: #ffffff;
+  overflow: hidden;
+}
+
+.compact-rubric summary {
+  min-height: 40px;
+  display: flex;
+  align-items: center;
+  padding: 0 10px;
+  color: var(--accent-dark);
+  font-weight: 900;
+  cursor: pointer;
+}
+
+.compact-rubric .rubric-grid {
+  padding: 0 10px 10px;
+}
+
+.compact-rubric .rubric-grid div {
+  padding: 8px;
 }
 
 .reference-note {

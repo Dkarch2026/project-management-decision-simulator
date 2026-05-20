@@ -1,13 +1,13 @@
 export const metricDefinitions = {
-  scope: "How stable and controlled the project scope is.",
-  schedule: "How likely the project is to meet planned timing.",
-  budget: "How healthy the project cost position is.",
-  quality: "How well outputs meet standards and acceptance needs.",
-  morale: "How sustainable team workload and engagement are.",
-  stakeholders: "How much confidence and support stakeholders show.",
-  risk: "Exposure to threats. Higher values are worse.",
-  communications: "How effectively information reaches the right people.",
-  procurement: "How healthy vendor, contract, and supplier performance is."
+  scope: "Scope stability: how well approved deliverables and boundaries are controlled.",
+  schedule: "Schedule health: how likely planned milestones and sequencing can be met.",
+  budget: "Budget health: how well cost exposure, contingency, and forecast stability are controlled.",
+  quality: "Quality readiness: how well outputs meet standards, acceptance criteria, and use needs.",
+  morale: "Resource sustainability: how manageable workload, role clarity, and team capacity are.",
+  stakeholders: "Stakeholder support: how much confidence, alignment, and adoption readiness stakeholders show.",
+  risk: "Risk exposure: unresolved threat level. Higher values are worse.",
+  communications: "Communication effectiveness: how clearly, timely, and transparently project information reaches decision makers and affected groups.",
+  procurement: "Procurement/vendor health: how well supplier performance, contract expectations, and external commitments are controlled."
 };
 
 export const metricLabels = {
@@ -41,6 +41,10 @@ export const scenarios = [
       "A professional services firm is replacing disconnected sales, client service, and reporting tools with a cloud CRM. Executives want rapid adoption before the next fiscal year, while regional offices worry about losing local workflow flexibility.",
     objective:
       "Deploy a standardized CRM with migrated customer data, role-based dashboards, and trained users across six regions.",
+    centralTension:
+      "The core decision is how to preserve launch timing and standardization while maintaining readiness, security assurance, and regional adoption.",
+    governanceContext:
+      "The COO sponsor owns business approval; IT security controls security acceptance; baseline changes should go through the steering committee or change-control process.",
     constraints: ["Nine-month implementation window", "Fixed software subscription budget", "High data quality expectations", "Regional process variation"],
     sponsorExpectations:
       "The COO expects a visible productivity gain in the first quarter after launch and minimal disruption to revenue teams.",
@@ -128,20 +132,20 @@ export const scenarios = [
         options: [
           option("Close the project with adoption metrics and transfer benefits tracking to operations.", { scope: 4, schedule: 4, budget: 3, stakeholders: -2, communications: 3 }, "This respects project closure boundaries but may leave the sponsor wanting stronger outcome evidence."),
           option("Extend the project for a 90-day benefits measurement period.", { schedule: -6, budget: -6, stakeholders: 6, quality: 3, morale: -3 }, "This gives the sponsor more confidence but changes the closure plan and consumes resources."),
-          option("Create a benefits owner charter and lessons-learned package before closing.", { communications: 7, stakeholders: 5, integration: 0, risk: -4, schedule: -2 }, "This integrates project outputs with operational accountability without fully extending the project."),
-          option("Report the project as complete and exclude benefits from the final narrative.", { schedule: 5, budget: 2, stakeholders: -8, communications: -5, risk: 4 }, "This closes quickly, but it weakens transparency about whether business outcomes will be realized.")
+          option("Create a benefits owner charter and lessons-learned package before closing.", { communications: 7, stakeholders: 5, integration: 0, risk: -4, schedule: -2 }, "This transfers benefits tracking to accountable operational owners with measures, review timing, and escalation expectations, without requiring the project to remain open until benefits fully mature."),
+          option("Report the project as complete and exclude benefits from the final narrative.", { schedule: 5, budget: 2, stakeholders: -8, communications: -5, risk: 4 }, "This supports administrative closure, but it severs the link between deliverable completion and benefits accountability, reducing transparency for sponsor and operations stakeholders.")
         ]
       }
     ],
     finalDebrief:
-      "This scenario emphasizes balancing standardization, adoption, vendor performance, and risk-based governance in a software implementation.",
+      "This scenario illustrates how standardization, adoption readiness, vendor performance, and risk-based governance must be managed together; decisions that protect schedule or baseline control can create downstream consequences in quality, stakeholder trust, and benefits realization.",
     instructorNotes: {
       emphasis: ["Integration", "Scope", "Quality", "Risk", "Procurement", "Stakeholder"],
       tradeoffs:
         "Protecting schedule can transfer pressure into quality, adoption, vendor performance, and benefits realization.",
       discussion: ["Which project constraint is being protected, and which constraint absorbs the pressure?", "What evidence should be required before approving a baseline change?", "How should accountability continue after project closure?"],
       assignment:
-        "Prepare a change-control recommendation that identifies the preferred option, expected tradeoffs, and conditions for approval."
+        "Prepare an integrated change request that documents the trigger, affected baselines, alternatives considered, impact analysis across scope, schedule, cost, quality, risk, and stakeholder adoption, decision authority, approval criteria, and post-decision monitoring."
     }
   },
   {
@@ -151,7 +155,11 @@ export const scenarios = [
     background:
       "A regional healthcare network is implementing a patient portal across five clinics. The project has strong executive support, but clinical staff are worried about workflow disruption. The vendor has missed two configuration deadlines, and patient privacy concerns are increasing.",
     objective:
-      "Launch a secure patient portal for appointment messaging, lab result notifications, and care-team communication.",
+      "Launch a secure patient portal for appointment messaging, lab result notifications, and care-team communication while balancing HIPAA-sensitive data handling, clinic workflow readiness, vendor delivery constraints, and stakeholder confidence.",
+    centralTension:
+      "The core decision is whether to preserve launch timing or delay, phase, or govern the release for risk reduction, workflow readiness, and patient trust.",
+    governanceContext:
+      "Compliance and clinical leadership are approval authorities for privacy, workflow readiness, and patient-facing communication; vendor commitments should be handled through contract and escalation paths.",
     constraints: ["HIPAA-sensitive data", "Clinic workflow disruption", "Vendor configuration delays", "Public trust"],
     sponsorExpectations:
       "The Chief Medical Officer expects launch before the patient engagement reporting period begins.",
@@ -231,14 +239,14 @@ export const scenarios = [
       }
     ],
     finalDebrief:
-      "This scenario centers on clinical stakeholder trust, vendor accountability, privacy risk, and operational readiness.",
+      "This scenario illustrates how launch timing, privacy risk, vendor accountability, and clinical adoption readiness must be managed together; a schedule-driven decision that ignores trust and workflow readiness can create downstream quality and stakeholder consequences.",
     instructorNotes: {
       emphasis: ["Stakeholder", "Communications", "Risk", "Procurement", "Resource", "Quality"],
       tradeoffs:
         "Executive urgency must be balanced against adoption readiness, workflow impact, trust, and regulated data risk.",
       discussion: ["How should stakeholder concerns be represented in project governance?", "When is a phased launch a stronger control strategy than a full launch?", "What evidence should be required before communicating launch readiness?"],
       assignment:
-        "Create a stakeholder engagement plan that defines concerns, influence, communication needs, and escalation points."
+        "Develop a stakeholder engagement plan that maps influence and concerns, defines communication cadence and channels, assigns owners, and establishes escalation thresholds for unresolved adoption, workflow, or compliance issues."
     }
   },
   {
@@ -249,6 +257,10 @@ export const scenarios = [
       "A city library renovation must update HVAC, accessibility, and learning spaces while keeping some public services available. Community groups want quiet study space preserved, while city leaders want a visible modernization.",
     objective:
       "Renovate the library safely, meet code requirements, and reopen full services before the summer reading season.",
+    centralTension:
+      "The core decision is how to protect the reopening milestone while treating code, permitting, accessibility, and public access impacts as non-negotiable constraints.",
+    governanceContext:
+      "Code, permit, accessibility, and public safety requirements are not discretionary; material changes should be routed through city governance, the library sponsor, and the contractor change process.",
     constraints: ["Fixed public bond budget", "Permit and inspection dependencies", "Public access expectations", "Aging building surprises"],
     sponsorExpectations:
       "The city manager expects no major budget overrun and a ribbon cutting before summer programs begin.",
@@ -292,9 +304,9 @@ export const scenarios = [
           "Residents complain about early morning construction noise. The contractor is using early shifts to protect the schedule.",
         reflections: [commonReflections[1], commonReflections[3]],
         options: [
-          option("Keep early shifts and have the city manager defend the schedule.", { schedule: 5, stakeholders: -7, communications: -4, risk: 3 }, "This protects construction momentum but damages community trust."),
+          option("Keep early shifts and have the city manager defend the schedule.", { schedule: 5, stakeholders: -7, communications: -4, risk: 3 }, "This protects construction momentum, but it treats executive sponsorship as a substitute for stakeholder engagement and public impact mitigation."),
           option("Move noisy work later and update the construction sequence.", { schedule: -5, stakeholders: 6, communications: 5, morale: 2 }, "This responds to the community but creates schedule pressure."),
-          option("Create a weekly public disruption forecast and hotline.", { budget: -2, communications: 8, stakeholders: 5, risk: -3 }, "This improves transparency and issue handling without fully changing work hours."),
+          option("Create a weekly public disruption forecast and hotline.", { budget: -2, communications: 8, stakeholders: 5, risk: -3 }, "This improves transparency and issue handling, but communication alone is not a substitute for schedule or sequencing changes if disruption exceeds acceptable thresholds."),
           option("Offer temporary quiet workspaces at a nearby facility.", { budget: -4, stakeholders: 6, communications: 4, schedule: 1 }, "This mitigates user impact while construction continues.")
         ]
       },
@@ -328,14 +340,14 @@ export const scenarios = [
       }
     ],
     finalDebrief:
-      "This facilities scenario highlights public accountability, code quality, cost contingency, and construction disruption management.",
+      "This scenario illustrates how baseline control, code compliance, cost contingency, public accountability, and construction disruption must be governed together; unresolved discoveries can shift pressure into scope, schedule, cost, and stakeholder trust.",
     instructorNotes: {
       emphasis: ["Cost", "Schedule", "Quality", "Risk", "Stakeholder", "Procurement"],
       tradeoffs:
         "Baseline control must be weighed against compliance, public value, stakeholder confidence, and lifecycle quality.",
       discussion: ["When should new information justify changing the approved baseline?", "What makes a partial delivery acceptable or unacceptable?", "How should contingency be governed when several constraints are under pressure?"],
       assignment:
-        "Create a change request that explains the issue, impact on constraints, funding options, and recommended governance decision."
+        "Create a construction change request that documents the discovered condition, requirements or compliance driver, impact on scope, schedule, cost, quality, risk, contingency use, public access mitigation, funding options, and governance approval path."
     }
   },
   {
@@ -346,6 +358,10 @@ export const scenarios = [
       "A manufacturer is launching a connected industrial sensor for existing customers. Engineering is still refining firmware, procurement is managing chip shortages, and sales has announced an aggressive launch window.",
     objective:
       "Deliver the first production run with reliable firmware, certified components, and sales enablement materials.",
+    centralTension:
+      "The core decision is how to balance launch timing and margin pressure against certification readiness, supplier reliability, and customer acceptance.",
+    governanceContext:
+      "Quality certification and customer safety are release gates; supplier issues should be managed through documented performance controls, acceptance criteria, and escalation paths.",
     constraints: ["Component availability", "Quality certification", "Aggressive launch date", "Margin targets"],
     sponsorExpectations:
       "The VP of Product expects first shipments before a major trade show and wants no visible quality issues.",
@@ -425,14 +441,14 @@ export const scenarios = [
       }
     ],
     finalDebrief:
-      "The rollout requires balancing market timing against product quality, supplier constraints, and expectation setting.",
+      "This scenario illustrates how market timing, product quality, supplier constraints, certification readiness, and customer expectations must be controlled together; protecting launch momentum can transfer risk into acceptance, trust, and downstream support.",
     instructorNotes: {
       emphasis: ["Scope", "Quality", "Procurement", "Risk", "Communications"],
       tradeoffs:
         "Late scope pressure and supply choices can affect quality assurance, risk exposure, stakeholder commitments, and trust.",
       discussion: ["When is accepting a quality exception an appropriate project decision?", "How should scope or quantity be adjusted when constraints tighten?", "How should commitments be controlled when uncertainty remains?"],
       assignment:
-        "Draft a risk response plan that defines triggers, owners, mitigation actions, and communication expectations."
+        "Draft a risk response plan that defines root causes, risk events, potential effects, owners, response strategy, triggers, escalation thresholds, mitigation actions, and communication expectations."
     }
   },
   {
@@ -443,6 +459,10 @@ export const scenarios = [
       "A college is redesigning a graduate business curriculum to include analytics, ethics, and flexible online delivery. Faculty governance is strong, enrollment pressure is real, and accreditation review is approaching.",
     objective:
       "Approve and implement a redesigned curriculum with faculty support, accreditation alignment, and updated course shells.",
+    centralTension:
+      "The core decision is how to balance faculty governance, accreditation evidence, student value, and launch timing without weakening adoption or quality readiness.",
+    governanceContext:
+      "Curriculum approval depends on faculty governance and accreditation expectations; changes should trace to program outcomes, acceptance criteria, and implementation capacity.",
     constraints: ["Faculty governance calendar", "Accreditation evidence", "Instructional design capacity", "Enrollment targets"],
     sponsorExpectations:
       "The dean expects the new curriculum to be marketed for the next admissions cycle.",
@@ -522,14 +542,14 @@ export const scenarios = [
       }
     ],
     finalDebrief:
-      "This change scenario focuses on governance, resource capacity, communication, and academic quality assurance.",
+      "This scenario illustrates how governance authority, expert capacity, communication, and quality evidence must be balanced; moving too quickly without adoption and acceptance criteria can create downstream approval, readiness, and stakeholder trust risks.",
     instructorNotes: {
       emphasis: ["Stakeholder", "Resource", "Quality", "Communications", "Integration"],
       tradeoffs:
         "Organizational authority, expert capacity, evidence requirements, and stakeholder trust all shape project pace.",
       discussion: ["How should governance risk be managed when approval authority is distributed?", "When is a pilot preferable to full implementation?", "How should quality be defined when success depends on adoption and evidence?"],
       assignment:
-        "Prepare a stakeholder engagement matrix that identifies influence, concerns, communication needs, and decision rights."
+        "Prepare a stakeholder engagement matrix that identifies stakeholder groups, influence, interests, concerns, engagement objective, communication cadence, decision rights, owner, and escalation threshold."
     }
   },
   {
@@ -540,6 +560,10 @@ export const scenarios = [
       "A nonprofit consortium is launching a housing navigation program funded by a city grant. Partner agencies share the mission but disagree on referral criteria, reporting burden, and client privacy practices.",
     objective:
       "Implement a coordinated housing support program with referral workflows, case tracking, and grant reporting.",
+    centralTension:
+      "The core decision is whether to prioritize speed, legitimacy, privacy, or consistency in criteria and service delivery under grant constraints.",
+    governanceContext:
+      "Grant requirements, privacy expectations, and legal or compliance review define the boundaries for eligibility criteria, data sharing, and public reporting.",
     constraints: ["Grant compliance", "Client confidentiality", "Partner agency capacity", "Urgent community need"],
     sponsorExpectations:
       "The city funder expects measurable service volume within the first quarter.",
@@ -556,7 +580,7 @@ export const scenarios = [
         reflections: [commonReflections[1], commonReflections[3]],
         options: [
           option("Adopt the city funder's preferred criteria immediately.", { schedule: 5, stakeholders: -6, risk: 3, communications: -2 }, "This gives fast direction but may reduce partner ownership."),
-          option("Facilitate a criteria workshop using mission and grant requirements.", { schedule: -4, communications: 7, stakeholders: 7, risk: -4 }, "This builds shared rationale while slowing initial rollout."),
+          option("Facilitate a criteria workshop using mission and grant requirements.", { schedule: -4, communications: 7, stakeholders: 7, risk: -4 }, "This builds stakeholder engagement and traceability, but the criteria still must stay within grant, policy, and governance limits."),
           option("Allow each agency to use its own criteria for the first quarter.", { schedule: 4, scope: -7, quality: -5, risk: 7, stakeholders: 2 }, "This reduces conflict but undermines consistency and reporting validity."),
           option("Pilot two criteria models and compare outcomes.", { schedule: -5, quality: 5, stakeholders: 5, risk: -2, budget: -3 }, "This creates evidence but may be difficult to explain to the funder.")
         ]
@@ -619,14 +643,14 @@ export const scenarios = [
       }
     ],
     finalDebrief:
-      "This program implementation scenario explores mission alignment, funder expectations, privacy risk, reporting quality, and resource sustainability.",
+      "This scenario illustrates how mission urgency, funder expectations, privacy risk, reporting quality, and staff sustainability must be managed together; increasing service volume without controls can create downstream quality, compliance, and resource-capacity consequences.",
     instructorNotes: {
       emphasis: ["Integration", "Risk", "Resource", "Cost", "Stakeholder", "Communications"],
       tradeoffs:
         "Mission urgency does not remove the need for privacy, reporting discipline, resource sustainability, and sponsor alignment.",
       discussion: ["How should a project balance output volume with quality and sustainability?", "What controls are needed when multiple partners contribute to the same deliverable?", "How should sensitive stakeholder information be governed?"],
       assignment:
-        "Build a risk register that names root causes, owners, probability, impact, response strategy, and monitoring triggers."
+        "Build a risk register that identifies root cause, risk event, effect, owner, probability, impact, response strategy, residual risk, trigger, review timing, and escalation path."
     }
   },
   {
@@ -637,6 +661,10 @@ export const scenarios = [
       "A technology company is planning a hybrid launch summit for a new enterprise platform. Executive visibility is high, the creative concept keeps expanding, and regional teams need localized campaign assets.",
     objective:
       "Deliver a high-quality hybrid event and coordinated campaign that generates qualified enterprise leads.",
+    centralTension:
+      "The core decision is how to maintain a fixed launch event while governing executive changes, supplier readiness, audience quality, and benefits evidence.",
+    governanceContext:
+      "The CMO owns sponsor priorities, but event scope, supplier readiness, and success reporting should be governed through documented decision authority, acceptance criteria, and follow-up ownership.",
     constraints: ["Fixed event date", "Executive availability", "Hybrid production complexity", "Lead quality targets"],
     sponsorExpectations:
       "The Chief Marketing Officer expects a polished event, strong attendance, and credible sales pipeline impact.",
@@ -666,8 +694,8 @@ export const scenarios = [
           "The event platform vendor's rehearsal stream drops twice. The vendor says it was a temporary network issue.",
         reflections: [commonReflections[2], commonReflections[4]],
         options: [
-          option("Require a technical remediation plan and second full rehearsal.", { schedule: -3, budget: -2, procurement: 5, quality: 6, risk: -7 }, "This uses vendor governance to reduce event failure risk."),
-          option("Accept the explanation and continue production.", { schedule: 3, budget: 2, risk: 7, quality: -5, procurement: -3 }, "This preserves pace but leaves a critical delivery risk unresolved."),
+          option("Require a technical remediation plan and second full rehearsal.", { schedule: -3, budget: -2, procurement: 5, quality: 6, risk: -7 }, "This strengthens supplier accountability, acceptance readiness, and contingency planning, which reduces launch failure exposure but consumes time and budget."),
+          option("Accept the explanation and continue production.", { schedule: 3, budget: 2, risk: 7, quality: -5, procurement: -3 }, "This protects schedule performance by deferring corrective action, but it weakens quality control and leaves a known risk without a sufficient response."),
           option("Contract a backup streaming provider.", { budget: -7, procurement: 3, risk: -8, quality: 3 }, "This adds resilience at a significant cost."),
           option("Move the highest-value sessions to in-person only.", { scope: -6, risk: -3, stakeholders: -5, quality: 2 }, "This reduces streaming exposure but weakens the hybrid promise.")
         ]
@@ -716,14 +744,14 @@ export const scenarios = [
       }
     ],
     finalDebrief:
-      "This event scenario demonstrates the tension between executive visibility, production risk, campaign localization, and measurable business outcomes.",
+      "This scenario illustrates how executive visibility, production risk, campaign localization, and measurable benefits must be managed together; polished delivery can still leave unresolved questions about outcome ownership and benefits realization.",
     instructorNotes: {
       emphasis: ["Schedule", "Procurement", "Communications", "Quality", "Integration"],
       tradeoffs:
         "Visible delivery quality and measurable benefits are related, but they are not identical success criteria.",
       discussion: ["How should late sponsor requests be governed once execution is underway?", "When does backup planning become necessary rather than optional?", "How should benefits be measured when outcomes mature after project closure?"],
       assignment:
-        "Create a closeout and benefits realization plan that separates immediate delivery results from longer-term outcome measures, assigns owners, and defines follow-up review dates."
+        "Create a closeout and benefits realization plan that separates immediate delivery results from longer-term outcome measures, identifies acceptance criteria, assigns owners, defines follow-up review dates, and documents how unresolved benefits will transfer to operations."
     }
   },
   {
@@ -734,6 +762,10 @@ export const scenarios = [
       "A retail company is implementing an AI forecasting model to improve inventory decisions. Data scientists are optimistic, store leaders distrust black-box predictions, and legal is reviewing responsible AI obligations.",
     objective:
       "Deploy an explainable demand forecasting capability integrated into planning workflows across three product categories.",
+    centralTension:
+      "The core decision is how to balance model performance, explainability, stakeholder adoption, and operational ownership before scaling the capability.",
+    governanceContext:
+      "Legal, operations, analytics, and the sponsor share decision authority for responsible AI requirements, acceptance criteria, model monitoring, and transition to operations.",
     constraints: ["Model accuracy uncertainty", "Data quality variation", "Responsible AI expectations", "Planner adoption"],
     sponsorExpectations:
       "The Chief Supply Chain Officer expects inventory reduction without worsening stockouts.",
@@ -813,14 +845,14 @@ export const scenarios = [
       }
     ],
     finalDebrief:
-      "This AI implementation scenario emphasizes quality criteria, responsible risk management, adoption, vendor transparency, and operational governance.",
+      "This scenario illustrates how quality criteria, responsible risk management, stakeholder adoption, vendor transparency, and operational ownership must be managed together; technical performance alone is insufficient if governance, explainability, and monitoring are weak.",
     instructorNotes: {
       emphasis: ["Quality", "Risk", "Stakeholder", "Procurement", "Integration"],
       tradeoffs:
         "Technical performance must be balanced with governance, explainability, stakeholder adoption, and operational ownership.",
       discussion: ["Who should define success criteria when technical and operational priorities differ?", "When is aggregate performance insufficient evidence of project success?", "What ownership structure must exist before responsible project closure?"],
       assignment:
-        "Write a governance charter section that defines monitoring, escalation, ownership, and acceptance criteria."
+        "Write a governance charter section that defines success and acceptance criteria, monitoring cadence, model or deliverable owner, escalation path, decision rights, review timing, and operational handoff conditions."
     }
   }
 ];

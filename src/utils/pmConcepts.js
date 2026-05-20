@@ -1,7 +1,7 @@
 const conceptRules = [
   {
     match: /change request|change-control|change control|baseline/i,
-    concepts: ["Change control", "Baseline management", "Constraint impact analysis", "Governance decision making"]
+    concepts: ["Change control", "Baseline management", "Constraint impact analysis", "Governance decision making", "Requirements traceability"]
   },
   {
     match: /stakeholder engagement|stakeholder engagement matrix|stakeholder/i,
@@ -9,7 +9,7 @@ const conceptRules = [
   },
   {
     match: /risk register|risk response|risk/i,
-    concepts: ["Risk identification", "Risk ownership", "Response strategy", "Monitoring triggers"]
+    concepts: ["Risk identification", "Risk ownership", "Response strategy", "Monitoring triggers", "Escalation thresholds"]
   },
   {
     match: /communication plan|communication expectations|communication/i,
@@ -21,7 +21,7 @@ const conceptRules = [
   },
   {
     match: /transition|closure|benefits|owner/i,
-    concepts: ["Project closure", "Benefits realization", "Operational handoff", "Accountability transfer"]
+    concepts: ["Project closure", "Benefits realization", "Operational handoff", "Accountability transfer", "Follow-up review timing"]
   },
   {
     match: /procurement|vendor|contract|supplier/i,
@@ -29,7 +29,15 @@ const conceptRules = [
   },
   {
     match: /quality|acceptance|criteria/i,
-    concepts: ["Quality planning", "Acceptance criteria", "Verification", "Fit-for-purpose delivery"]
+    concepts: ["Quality planning", "Acceptance criteria", "Quality assurance", "Defect detection", "Fit-for-purpose delivery"]
+  },
+  {
+    match: /dependency|sequence|sequencing|milestone|critical path/i,
+    concepts: ["Dependency management", "Sequencing", "Milestone control", "Critical path awareness"]
+  },
+  {
+    match: /reserve|contingency|forecast|funding/i,
+    concepts: ["Contingency planning", "Reserve management", "Cost forecasting", "Funding decision path"]
   }
 ];
 
@@ -50,7 +58,7 @@ export function conceptsForSuggestedAction(action = "", emphasis = []) {
     concepts.add("Monitoring and control");
   }
 
-  return Array.from(concepts).slice(0, 6);
+  return Array.from(concepts).slice(0, 8);
 }
 
 export function decisionEffectRubric() {
@@ -58,22 +66,22 @@ export function decisionEffectRubric() {
     {
       range: "1-3 points",
       label: "Minor effect",
-      meaning: "A noticeable but limited effect on one project condition."
+      meaning: "Limited effect on one project condition."
     },
     {
       range: "4-6 points",
       label: "Moderate effect",
-      meaning: "A meaningful effect that should influence project monitoring or communication."
+      meaning: "Meaningful effect requiring monitoring or communication."
     },
     {
       range: "7+ points",
       label: "Major effect",
-      meaning: "A significant effect that may require governance attention, tradeoff discussion, or risk response."
+      meaning: "Significant effect that may require governance, risk response, or rebaseline review."
     },
     {
       range: "Risk metric",
       label: "Inverted",
-      meaning: "Higher risk exposure is worse; reducing risk improves project health."
+      meaning: "Higher risk is worse; reducing risk improves project health."
     }
   ];
 }
@@ -83,22 +91,22 @@ export function referenceAnchors() {
     {
       label: "PMI PMBOK Guide and Standards",
       url: "https://www.pmi.org/pmbok-guide-standards/foundational/pmbok",
-      use: "Reference point for project management principles, domains, tailoring, and value delivery language."
+      use: "Informational learning anchor for project management principles, domains, tailoring, and value delivery language."
     },
     {
       label: "PMI Process Groups: A Practice Guide",
       url: "https://www.pmi.org/pmbok-guide-standards/practice-guides/process-groups-a-practice-guide",
-      use: "Reference point for process-oriented practices such as initiating, planning, executing, monitoring and controlling, and closing."
+      use: "Informational learning anchor for process-oriented practices such as initiating, planning, executing, monitoring and controlling, and closing."
     },
     {
       label: "PMI: The Essential Role of Communications",
       url: "https://www.pmi.org/learning/thought-leadership/pulse/essential-role-communications",
-      use: "Reference point for the importance of clear stakeholder communication in project outcomes."
+      use: "Informational learning anchor for the importance of clear stakeholder communication in project outcomes."
     },
     {
       label: "PMI Pulse of the Profession 2026: Driving Success in Complex Projects",
       url: "https://www.pmi.org/learning/thought-leadership/driving-success-in-complex-projects",
-      use: "Reference point for complexity, stakeholder alignment, systems thinking, and outcome-focused project work."
+      use: "Informational learning anchor for complexity, stakeholder alignment, systems thinking, and outcome-focused project work."
     }
   ];
 }
