@@ -24,3 +24,8 @@ The site URL should become:
 https://dkarch2026.github.io/project-management-decision-simulator/
 
 It can take a minute or two for GitHub Pages to publish after the first setup.
+
+Notes:
+- This folder is the static GitHub Pages version of the simulator.
+- It does not require npm, Vite, React build tooling, or the local server.mjs file.
+- Keep the relative paths in index.html as ./src/styles.css and ./src/preview.js so the project works from the GitHub Pages repository URL.
